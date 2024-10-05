@@ -280,6 +280,19 @@ int maxBST(BTNode<int>* root)
 {
 	if (root == nullptr)
 		return -1;
+	while (root->m_right != nullptr)
+	{
+		root = root->m_right;
+	}
+	return root->m_data;
+
+	
+}
+
+int maxBSTRecursiveMethod(BTNode<int>* root)
+{
+	if (root == nullptr)
+		return -1;
 
 	if (root->m_right != nullptr)
 		return maxBST(root->m_right);
@@ -334,10 +347,10 @@ int main(int argc, char* argv)
 	{
 		cout << "found";
 	}*/
-	cout << "Minimimum value : " << minBST(root);
-	cout << "Minimimum using minBSTRecursive value : " << minBSTRecursive(root);
-	cout << "maximumn in bst : " << maxBST(root);
-
+	cout << "Minimimum value : " << minBST(root) << endl;;
+	cout << "Minimimum using minBSTRecursive value : " << minBSTRecursive(root) <<endl;;
+	cout << "Maximumn value in Balance binary iterative method : " << maxBST(root) << endl;;
+	cout << "Maximum value in Binary tree using RecursiveMethod : " << maxBSTRecursiveMethod(root) << endl;
 	delete root;//this will delete whole tree.
 
 
