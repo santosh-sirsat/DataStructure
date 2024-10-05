@@ -215,71 +215,6 @@ int minValue(BTNode<int>* root)
 	return std::min(min, root->m_data);
 }
 
-int maxValue(BTNode<int>* root)
-{
-	int mx = 0;
-	if (root == nullptr)
-	{
-		return 0;
-	}
-	mx = std::max(maxValue(root->m_left), maxValue(root->m_right));
-	return std::max(mx, root->m_data);
-}
-
-int leafNode(BTNode<int>* root)
-{
-	if (root == nullptr)
-	{
-		return 0;
-	}
-
-	if (root->m_left == nullptr && root->m_right == nullptr)
-		return 1;
-	
-	return  leafNode(root->m_left) + leafNode(root->m_right);
-}
-
-BTNode<int>* Search(BTNode<int>* root, int element)
-{
-	if (root == nullptr)
-		return nullptr;
-	if (root->m_data == element)
-		return root;
-
-	if (element > root->m_data)
-	{
-		return Search(root->m_right, element);
-	}
-	else if (element < root->m_data)
-	{
-		return Search(root->m_left, element);
-	}
-	return nullptr;
-}
-int minBST(BTNode<int>* root)
-{
-	if (root == nullptr)
-		return -1;
-	while (root->m_left != nullptr)
-	{
-		root = root->m_left;
-	}
-	return root->m_data;
-}
-int minBSTRecursive(BTNode<int>* root)
-{
-	if (root == nullptr)
-		return -1;
-
-	if (root->m_left != nullptr)
-		return minBSTRecursive(root->m_left);
-	else
-		return root->m_data;
-}
-int maxBST(BTNode<int>* root)
-{
-
-}
 int main(int argc, char* argv)
 {
 	/*BTNode<int>* root = new BTNode<int>(1);
@@ -304,36 +239,19 @@ int main(int argc, char* argv)
 	}
 
 	cout << "Searching the 11" << endl;
-	//if (search(root,11))
-	//{
-	//	cout << "Found" << endl;
-	//}
-	//else
-	//{
-	//	cout << "Not found" << endl;
-	//}
-	//cout << "Minimum value in the tree : " << minValue(root) << endl;
-	//cout << "Maximum value in the tree : " << maxValue(root) << endl;
-	//cout << "Leaf Node count : " << leafNode(root) << endl;
-	//cout << "Enter element to search" << endl;
-	//int element;
-	//cin >> element;
-	/*BTNode<int>* result = Search(root, element);
-	if (result == nullptr)
+	if (search(root,11))
 	{
-		cout << element << " not present in given tree";
+		cout << "Found" << endl;
 	}
 	else
 	{
-		cout << "found";
-	}*/
-	cout << "Minimimum value : " << minBST(root);
-	cout << "Minimimum using minBSTRecursive value : " << minBSTRecursive(root);
-	cout << "maximumn in bst : " << maxBST(root);
+		cout << "Not found" << endl;
+	}
+	cout << "Minimum value in the tree : " << minValue(root) << endl;
 	delete root;//this will delete whole tree.
 
 
 	return 0;
 }
 
-// 5 3 8 2 4 7 9 -1 -1 -1 -1 -1 -1 -1 -1
+// c
