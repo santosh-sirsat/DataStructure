@@ -278,8 +278,15 @@ int minBSTRecursive(BTNode<int>* root)
 }
 int maxBST(BTNode<int>* root)
 {
+	if (root == nullptr)
+		return -1;
 
+	if (root->m_right != nullptr)
+		return maxBST(root->m_right);
+	else
+		return root->m_data;
 }
+
 int main(int argc, char* argv)
 {
 	/*BTNode<int>* root = new BTNode<int>(1);
@@ -330,6 +337,7 @@ int main(int argc, char* argv)
 	cout << "Minimimum value : " << minBST(root);
 	cout << "Minimimum using minBSTRecursive value : " << minBSTRecursive(root);
 	cout << "maximumn in bst : " << maxBST(root);
+
 	delete root;//this will delete whole tree.
 
 
