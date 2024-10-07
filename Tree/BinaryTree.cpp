@@ -285,8 +285,6 @@ int maxBST(BTNode<int>* root)
 		root = root->m_right;
 	}
 	return root->m_data;
-
-	
 }
 
 int maxBSTRecursiveMethod(BTNode<int>* root)
@@ -299,62 +297,64 @@ int maxBSTRecursiveMethod(BTNode<int>* root)
 	else
 		return root->m_data;
 }
+int rangeSum(BTNode<int>* root, int L, int R)
+{
+	//base case
+	if (root == nullptr)
+		return 0;
+
+	int sum = 0;
+	if (root->m_data >= L && root->m_data <= R)
+	{
+		sum += root->m_data;
+	}
+	
+	if (root->m_data > R)
+	{
+		sum += rangeSum(root->m_left, L, R);
+	}
+	else if (root->m_data < L)
+	{
+		sum += rangeSum(root->m_right, L, R);
+	}
+	else
+	{
+		sum += rangeSum(root->m_right, L, R) + rangeSum(root->m_left, L, R);
+	}
+	return sum;
+}
+
+bool isBinaryTree(BTNode<int>* root, long long min = -10000000000, long long max = 10000000000)
+{
+	if (root == nullptr) return true;
+
+	bool leftTree = isBinaryTree(root->m_left, min, root->m_data);
+	bool rightTree = isBinaryTree(root->m_right, root->m_data, max);
+
+	if (leftTree && rightTree && root->m_data > min && root->m_data < max)
+		return true;
+	else
+		return false;
+}
+// letf data of the binary root node data is always less and 
+bool IsBinarySearchTree(BTNode<int>* root)
+{
+	return isBinaryTree(root);
+}
 
 int main(int argc, char* argv)
 {
-	/*BTNode<int>* root = new BTNode<int>(1);
-	BTNode<int>* n1 = new BTNode<int>(2);
-	BTNode<int>* n2 = new BTNode<int>(3);
-
-	root->m_left = n1;
-	root->m_right = n2;*/
-
-	//BTNode<int>* root = takeInput();
 	BTNode<int>* root = takeInputLevelWise();
 	printTree(root);
-	cout << "No of nodes " << countNode(root)<<endl;
-	cout << "Height of tree is : "<<height(root) <<endl;
-	if (isSymentric(root))
-	{
-		cout << "Symentric tree" << endl;
-	}
-	else
-	{
-		cout << "Non symentric tree" << endl;
-	}
 
-	cout << "Searching the 11" << endl;
-	//if (search(root,11))
-	//{
-	//	cout << "Found" << endl;
-	//}
-	//else
-	//{
-	//	cout << "Not found" << endl;
-	//}
-	//cout << "Minimum value in the tree : " << minValue(root) << endl;
-	//cout << "Maximum value in the tree : " << maxValue(root) << endl;
-	//cout << "Leaf Node count : " << leafNode(root) << endl;
-	//cout << "Enter element to search" << endl;
-	//int element;
-	//cin >> element;
-	/*BTNode<int>* result = Search(root, element);
-	if (result == nullptr)
-	{
-		cout << element << " not present in given tree";
-	}
+	if (IsBinarySearchTree(root))
+		cout << "Given tree is binary search tree" << endl;
 	else
-	{
-		cout << "found";
-	}*/
-	cout << "Minimimum value : " << minBST(root) << endl;;
-	cout << "Minimimum using minBSTRecursive value : " << minBSTRecursive(root) <<endl;;
-	cout << "Maximumn value in Balance binary iterative method : " << maxBST(root) << endl;;
-	cout << "Maximum value in Binary tree using RecursiveMethod : " << maxBSTRecursiveMethod(root) << endl;
+		cout << "Not a binary search tree" << endl;
 	delete root;//this will delete whole tree.
-
 
 	return 0;
 }
 
 // 5 3 8 2 4 7 9 -1 -1 -1 -1 -1 -1 -1 -1
+// 10 5 15 3 7 -1 18 -1 -1 -1 -1 -1 -1
