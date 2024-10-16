@@ -342,19 +342,19 @@ bool IsBinarySearchTree(BTNode<int>* root)
 	return isBinaryTree(root);
 }
 
-int main(int argc, char* argv)
-{
-	BTNode<int>* root = takeInputLevelWise();
-	printTree(root);
-
-	if (IsBinarySearchTree(root))
-		cout << "Given tree is binary search tree" << endl;
-	else
-		cout << "Not a binary search tree" << endl;
-	delete root;//this will delete whole tree.
-
-	return 0;
-}
+//int main(int argc, char* argv)
+//{
+//	BTNode<int>* root = takeInputLevelWise();
+//	printTree(root);
+//
+//	if (IsBinarySearchTree(root))
+//		cout << "Given tree is binary search tree" << endl;
+//	else
+//		cout << "Not a binary search tree" << endl;
+//	delete root;//this will delete whole tree.
+//
+//	return 0;
+//}
 
 // 5 3 8 2 4 7 9 -1 -1 -1 -1 -1 -1 -1 -1
 // 10 5 15 3 7 -1 18 -1 -1 -1 -1 -1 -1
